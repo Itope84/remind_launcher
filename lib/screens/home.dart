@@ -4,8 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:remind_launcher/bloc/index.dart';
 import 'package:remind_launcher/screens/drawer.dart';
-
-enum NoticeType { REMINDER, NOTE, PROJECT }
+import 'package:remind_launcher/utils/enums/notice-type.dart';
 
 class LauncherHome extends StatefulWidget {
   @override
