@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:remind_launcher/bloc/index.dart';
+import 'package:remind_launcher/screens/drawer.dart';
 
 enum NoticeType { REMINDER, NOTE, PROJECT }
 
@@ -257,7 +258,17 @@ class _LauncherHomeState extends State<LauncherHome> {
                             _bloc.launchMessaging();
                           },
                         ),
-                        _buildNavItem('assets/images/drawer.png', "Drawer"),
+                        _buildNavItem(
+                          'assets/images/drawer.png',
+                          "Drawer",
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DrawerScreen(),
+                              ),
+                            );
+                          },
+                        ),
                         _buildNavItem(
                           'assets/images/chrome.png',
                           "Browser",

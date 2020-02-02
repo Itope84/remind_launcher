@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 class MainBloc with ChangeNotifier {
   List _apps = [];
 
+  List get apps {
+    return _apps;
+  }
+
   // IDEA: If launch fails show an error
   Future<bool> launchChrome() async {
     bool chromeLaunched = await DeviceApps.openApp('com.android.chrome');
