@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
+// import 'package:hardware_buttons/hardware_buttons.dart';
 import 'package:provider/provider.dart';
 import 'package:remind_launcher/bloc/index.dart';
 
@@ -9,6 +12,8 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  // StreamSubscription<HomeButtonEvent> _homeButtonSubscription;
+
   // bloc
   MainBloc _bloc;
   bool _isInitialised = false;
@@ -39,6 +44,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // _homeButtonSubscription = homeButtonEvents.listen((HomeButtonEvent event) {
+    //   if (mounted) Navigator.of(context).pop();
+    // });
   }
 
   @override

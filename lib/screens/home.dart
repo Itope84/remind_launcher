@@ -23,6 +23,7 @@ class _LauncherHomeState extends State<LauncherHome> {
   // bloc
   MainBloc _bloc;
   bool _isInitialised = false;
+  Timer _timer;
 
   Widget _buildNavItem(String image, String title, {Function onPressed}) {
     return InkWell(
@@ -160,17 +161,16 @@ class _LauncherHomeState extends State<LauncherHome> {
 
   @override
   void initState() {
-    // Get installed apps
-    Timer.periodic(
-      Duration(seconds: 1),
-      (Timer t) => setState(
-        () {
-          DateTime now = DateTime.now();
-          _time = DateFormat('kk:mm').format(now);
-          _date = DateFormat.MMMMEEEEd().format(DateTime.now());
-        },
-      ),
-    );
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      if (mounted)
+        setState(
+          () {
+            DateTime now = DateTime.now();
+            _time = DateFormat('kk:mm').format(now);
+            _date = DateFormat.MMMMEEEEd().format(DateTime.now());
+          },
+        );
+    });
 
     super.initState();
   }
@@ -306,5 +306,11 @@ class _LauncherHomeState extends State<LauncherHome> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 }
