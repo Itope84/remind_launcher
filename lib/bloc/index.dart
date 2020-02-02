@@ -1,7 +1,8 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
+import 'package:remind_launcher/bloc/tasks.dart';
 
-class MainBloc with ChangeNotifier {
+class MainBloc with ChangeNotifier, Tasks {
   List _apps = [];
 
   List get apps {
