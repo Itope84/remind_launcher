@@ -26,7 +26,7 @@ class MainBloc with ChangeNotifier {
     return await DeviceApps.openApp('com.android.dialer');
   }
 
-  Future<void> getApps() async {
+  Future<void> getApps({bool shouldNotify: true}) async {
     List apps = await DeviceApps.getInstalledApplications(
       onlyAppsWithLaunchIntent: true,
       includeAppIcons: true,
@@ -35,6 +35,6 @@ class MainBloc with ChangeNotifier {
 
     _apps = apps;
 
-    this.notifyListeners();
+    if (shouldNotify) this.notifyListeners();
   }
 }

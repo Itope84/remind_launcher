@@ -48,7 +48,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
         _bloc = Provider.of<MainBloc>(context);
       });
 
-      _bloc.getApps();
+      // Only rebuild if the apps haven't been fetched before
+      bool rebuild = _bloc.apps.length < 1;
+
+      _bloc.getApps(shouldNotify: rebuild);
       _isInitialised = true;
     }
 
