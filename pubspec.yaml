@@ -49,6 +49,9 @@ flutter:
     - assets/images/message.png
     - assets/images/phone.png
     - assets/images/camera.png
+    - assets/images/note.png
+    - assets/images/project.png
+    - assets/images/reminder.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
