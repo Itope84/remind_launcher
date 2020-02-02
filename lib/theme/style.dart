@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData appTheme = new ThemeData(
-  fontFamily: "Ubuntu",
+  fontFamily: "circular",
 );
 
 TextStyle f18 = TextStyle(fontSize: 18.0);

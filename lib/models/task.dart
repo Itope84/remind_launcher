@@ -8,6 +8,14 @@ class Task {
   bool done;
   DateTime createdAt;
 
+  Task({
+    this.type,
+    this.title,
+    this.body,
+    this.done = false,
+    this.createdAt,
+  });
+
   Map<String, dynamic> toJson() {
     Map<NoticeType, String> types = {
       NoticeType.NOTE: 'note',
