@@ -37,51 +37,61 @@ class _LauncherHomeState extends State<LauncherHome> {
     );
   }
 
-  Widget _buildRemindItem(NoticeType type, String title, String body) {
+  Widget _buildRemindItem(Task item) {
     return Stack(
       children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Column(
           children: <Widget>[
-            Container(
-              width: 35.0,
-              child: type == NoticeType.NOTE
-                  ? Image.asset('assets/images/note.png')
-                  : type == NoticeType.PROJECT
-                      ? Image.asset('assets/images/project.png')
-                      : Image.asset('assets/images/reminder.png'),
-            ),
-            SizedBox(
-              width: 10.0,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w500,
-                    ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: 35.0,
+                  child: item.type == NoticeType.NOTE
+                      ? Image.asset('assets/images/note.png')
+                      : item.type == NoticeType.PROJECT
+                          ? Image.asset('assets/images/project.png')
+                          : Image.asset('assets/images/reminder.png'),
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Text(
+                        item.body,
+                        style: TextStyle(
+                          color: Color(0xFF5C1616),
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    body,
-                    style: TextStyle(
-                      color: Color(0xFF5C1616),
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  width: 50.0,
+                )
+              ],
             ),
-            SizedBox(
-              width: 50.0,
-            )
+            Divider(
+              color: Color.fromRGBO(114, 96, 96, 0.76),
+              indent: 30.0,
+              thickness: 2.0,
+              height: 40.0,
+            ),
           ],
         ),
         Positioned(
@@ -121,61 +131,13 @@ class _LauncherHomeState extends State<LauncherHome> {
                 top: 30,
                 bottom: 100.0,
               ),
-              // TODO: Change to listview.builder
-              child: ListView(
-                children: <Widget>[
-                  _buildRemindItem(NoticeType.NOTE, 'DINNER',
-                      '2 wraps of Amala, Egusi soup'),
-                  // hr
-                  Divider(
-                    color: Color.fromRGBO(114, 96, 96, 0.76),
-                    indent: 30.0,
-                    thickness: 2.0,
-                    height: 40.0,
-                  ),
-                  _buildRemindItem(NoticeType.REMINDER, 'REMINDER',
-                      'Finish writing Personal statement'),
-
-                  Divider(
-                    color: Color.fromRGBO(114, 96, 96, 0.76),
-                    indent: 30.0,
-                    thickness: 2.0,
-                    height: 40.0,
-                  ),
-
-                  _buildRemindItem(NoticeType.PROJECT, 'PROJECT',
-                      'Build Personal Portfolio Website'),
-
-                  Divider(
-                    color: Color.fromRGBO(114, 96, 96, 0.76),
-                    indent: 30.0,
-                    thickness: 2.0,
-                    height: 40.0,
-                  ),
-
-                  _buildRemindItem(NoticeType.NOTE, 'DINNER',
-                      '2 wraps of Amala, Egusi soup'),
-                  // hr
-                  Divider(
-                    color: Color.fromRGBO(114, 96, 96, 0.76),
-                    indent: 30.0,
-                    thickness: 2.0,
-                    height: 40.0,
-                  ),
-                  _buildRemindItem(NoticeType.REMINDER, 'REMINDER',
-                      'Finish writing Personal statement'),
-
-                  Divider(
-                    color: Color.fromRGBO(114, 96, 96, 0.76),
-                    indent: 30.0,
-                    thickness: 2.0,
-                    height: 40.0,
-                  ),
-
-                  _buildRemindItem(NoticeType.PROJECT, 'PROJECT',
-                      'Build Personal Portfolio Website'),
-                ],
-              ),
+              child: _bloc.tasks.length > 0
+                  ? ListView.builder(
+                      itemCount: _bloc.tasks.length,
+                      itemBuilder: (context, int j) =>
+                          _buildRemindItem(_bloc.tasks[j]),
+                    )
+                  : Container(),
             ),
             Positioned(
               child: FloatingActionButton(
