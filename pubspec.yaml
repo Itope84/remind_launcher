@@ -90,3 +90,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-assets/fonts/#from-packages
+
+# fix bug https://medium.com/@amandeepkochhar/flutter-dart-the-class-cant-be-used-as-a-mixin-because-it-extends-a-class-other-than-object-a53eb5f214b0
+analyzer:
+  strong-mode: true
+  language:
+    enableSuperMixins: true
