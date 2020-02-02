@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 enum NoticeType { REMINDER, NOTE, PROJECT }
 
@@ -8,6 +10,9 @@ class LauncherHome extends StatefulWidget {
 }
 
 class _LauncherHomeState extends State<LauncherHome> {
+  String _time = DateFormat('kk:mm').format(DateTime.now());
+  String _date = DateFormat.MMMMEEEEd().format(DateTime.now());
+
   Widget _buildNavItem(String image, String title) {
     return InkWell(
       child: Container(
@@ -87,6 +92,23 @@ class _LauncherHomeState extends State<LauncherHome> {
   }
 
   @override
+  void initState() {
+    // Get installed apps
+    Timer.periodic(
+      Duration(seconds: 1),
+      (Timer t) => setState(
+        () {
+          DateTime now = DateTime.now();
+          _time = DateFormat('kk:mm').format(now);
+          _date = DateFormat.MMMMEEEEd().format(DateTime.now());
+        },
+      ),
+    );
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -111,11 +133,11 @@ class _LauncherHomeState extends State<LauncherHome> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "02:35",
+                        _time,
                         style: TextStyle(color: Colors.white, fontSize: 50.0),
                       ),
                       Text(
-                        "Friday, December 03",
+                        _date,
                         style: TextStyle(color: Colors.white, fontSize: 16.0),
                       )
                     ],
@@ -208,7 +230,7 @@ class _LauncherHomeState extends State<LauncherHome> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        _buildNavItem('assets/images/phone.png', "Phone"),
+                        _buildNavItem('assets/images/message.png', "Phone"),
                         _buildNavItem('assets/images/message.png', "Messages"),
                         _buildNavItem('assets/images/drawer.png', "Drawer"),
                         _buildNavItem('assets/images/chrome.png', "Browser"),
