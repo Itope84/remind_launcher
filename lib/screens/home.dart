@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:remind_launcher/bloc/index.dart';
 
 enum NoticeType { REMINDER, NOTE, PROJECT }
 
@@ -13,7 +15,11 @@ class _LauncherHomeState extends State<LauncherHome> {
   String _time = DateFormat('kk:mm').format(DateTime.now());
   String _date = DateFormat.MMMMEEEEd().format(DateTime.now());
 
-  Widget _buildNavItem(String image, String title) {
+  // bloc
+  MainBloc _bloc;
+  bool _isInitialised = false;
+
+  Widget _buildNavItem(String image, String title, {Function onPressed}) {
     return InkWell(
       child: Container(
         width: 50.0,
@@ -22,6 +28,7 @@ class _LauncherHomeState extends State<LauncherHome> {
           fit: BoxFit.contain,
         ),
       ),
+      onTap: onPressed,
     );
   }
 
@@ -110,6 +117,12 @@ class _LauncherHomeState extends State<LauncherHome> {
 
   @override
   Widget build(BuildContext context) {
+    if (!_isInitialised) {
+      setState(() {
+        _bloc = Provider.of<MainBloc>(context);
+      });
+    }
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -230,11 +243,35 @@ class _LauncherHomeState extends State<LauncherHome> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        _buildNavItem('assets/images/message.png', "Phone"),
-                        _buildNavItem('assets/images/message.png', "Messages"),
+                        _buildNavItem(
+                          'assets/images/phone.png',
+                          "Phone",
+                          onPressed: () {
+                            _bloc.launchDialer();
+                          },
+                        ),
+                        _buildNavItem(
+                          'assets/images/message.png',
+                          "Messages",
+                          onPressed: () {
+                            _bloc.launchMessaging();
+                          },
+                        ),
                         _buildNavItem('assets/images/drawer.png', "Drawer"),
-                        _buildNavItem('assets/images/chrome.png', "Browser"),
-                        _buildNavItem('assets/images/camera.png', "Camera"),
+                        _buildNavItem(
+                          'assets/images/chrome.png',
+                          "Browser",
+                          onPressed: () {
+                            _bloc.launchChrome();
+                          },
+                        ),
+                        _buildNavItem(
+                          'assets/images/camera.png',
+                          "Camera",
+                          onPressed: () {
+                            _bloc.launchCamera();
+                          },
+                        ),
                       ],
                     ),
                   ),
