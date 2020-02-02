@@ -106,6 +106,9 @@ class _LauncherHomeState extends State<LauncherHome> {
                   borderRadius: BorderRadius.circular(5.0),
                 ),
               ),
+              onTap: () {
+                _bloc.markTaskDone(item);
+              },
             ),
           ),
         )
@@ -131,11 +134,11 @@ class _LauncherHomeState extends State<LauncherHome> {
                 top: 30,
                 bottom: 100.0,
               ),
-              child: _bloc.tasks.length > 0
+              child: _bloc.activeTasks.length > 0
                   ? ListView.builder(
-                      itemCount: _bloc.tasks.length,
+                      itemCount: _bloc.activeTasks.length,
                       itemBuilder: (context, int j) =>
-                          _buildRemindItem(_bloc.tasks[j]),
+                          _buildRemindItem(_bloc.activeTasks[j]),
                     )
                   : Container(),
             ),
