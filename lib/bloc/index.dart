@@ -34,6 +34,8 @@ class MainBloc with ChangeNotifier, Tasks {
       includeSystemApps: true,
     );
 
+    apps.sort((a, b) => a.appName.compareTo(b.appName));
+
     _apps = apps;
 
     if (shouldNotify) this.notifyListeners();
