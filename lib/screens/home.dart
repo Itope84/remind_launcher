@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class _LauncherHomeState extends State<LauncherHome> {
   String _date = DateFormat.MMMMEEEEd().format(DateTime.now());
 
   bool _showBottomModal = false;
+  String _bgImage = '';
 
   // bloc
   MainBloc _bloc;
@@ -161,6 +163,16 @@ class _LauncherHomeState extends State<LauncherHome> {
 
   @override
   void initState() {
+    List<String> images = [
+      'car_ultra_urban.jpg',
+      'car_urban.jpg',
+      'car_forest.jpg',
+      'garden.jpg'
+    ];
+    final _random = new Random();
+
+    _bgImage = images[_random.nextInt(images.length)];
+
     _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       if (mounted)
         setState(
@@ -195,8 +207,7 @@ class _LauncherHomeState extends State<LauncherHome> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/car_ultra_urban.jpg'),
-              fit: BoxFit.cover),
+              image: AssetImage('assets/images/$_bgImage'), fit: BoxFit.cover),
         ),
         child: Container(
           decoration: BoxDecoration(
