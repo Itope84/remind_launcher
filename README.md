@@ -16,5 +16,6 @@ Feel free to contribute, and make a PR or create an issue if you have any idea o
 Bloc architecture with Provider
 
 ### Screenshots
-:----------------------------------------: | :-----------------------------:
+Home                                       | Add Task                        | Drawer
+:----------------------------------------: | :-----------------------------: | --------------------------- 
 ![Home Screen](https://github.com/Itope84/remind_launcher/blob/tasks/screenshots/home.png?raw=true) | ![Add Task](https://github.com/Itope84/remind_launcher/blob/tasks/screenshots/add-task.png?raw=true) | ![Drawer Screen](https://github.com/Itope84/remind_launcher/blob/tasks/screenshots/drawer.png?raw=true)
