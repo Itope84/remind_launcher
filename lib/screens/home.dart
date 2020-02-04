@@ -235,63 +235,72 @@ class _LauncherHomeState extends State<LauncherHome> {
                 ),
                 _taskListWidget(),
                 Positioned(
-                  bottom: 10.0,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.0),
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(0, 0, 0, 0.37),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    width: MediaQuery.of(context).size.width - 20.0,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 17.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        _buildNavItem(
-                          'assets/images/phone.png',
-                          "Phone",
-                          onPressed: () {
-                            _bloc.launchDialer();
-                          },
+                    bottom: 10.0,
+                    child: GestureDetector(
+                      onVerticalDragEnd: (DragEndDetails detail) {
+                        // show drawer
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DrawerScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10.0),
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(0, 0, 0, 0.37),
+                            borderRadius: BorderRadius.circular(30.0)),
+                        width: MediaQuery.of(context).size.width - 20.0,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 17.0,
                         ),
-                        _buildNavItem(
-                          'assets/images/message.png',
-                          "Messages",
-                          onPressed: () {
-                            _bloc.launchMessaging();
-                          },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            _buildNavItem(
+                              'assets/images/phone.png',
+                              "Phone",
+                              onPressed: () {
+                                _bloc.launchDialer();
+                              },
+                            ),
+                            _buildNavItem(
+                              'assets/images/message.png',
+                              "Messages",
+                              onPressed: () {
+                                _bloc.launchMessaging();
+                              },
+                            ),
+                            _buildNavItem(
+                              'assets/images/drawer.png',
+                              "Drawer",
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DrawerScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                            _buildNavItem(
+                              'assets/images/chrome.png',
+                              "Browser",
+                              onPressed: () {
+                                _bloc.launchChrome();
+                              },
+                            ),
+                            _buildNavItem(
+                              'assets/images/camera.png',
+                              "Camera",
+                              onPressed: () {
+                                _bloc.launchCamera();
+                              },
+                            ),
+                          ],
                         ),
-                        _buildNavItem(
-                          'assets/images/drawer.png',
-                          "Drawer",
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => DrawerScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                        _buildNavItem(
-                          'assets/images/chrome.png',
-                          "Browser",
-                          onPressed: () {
-                            _bloc.launchChrome();
-                          },
-                        ),
-                        _buildNavItem(
-                          'assets/images/camera.png',
-                          "Camera",
-                          onPressed: () {
-                            _bloc.launchCamera();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
+                    )),
                 Positioned.fill(
                   child: _showBottomModal
                       ? CustomBottomModal(
