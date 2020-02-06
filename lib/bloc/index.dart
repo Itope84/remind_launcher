@@ -16,7 +16,12 @@ class MainBloc with ChangeNotifier, Tasks {
   }
 
   Future<bool> launchCamera() async {
-    return await DeviceApps.openApp('com.android.camera2');
+    bool dialer = await DeviceApps.openApp('com.android.camera2');
+
+    if (!dialer) {
+      dialer = await DeviceApps.openApp('com.android.camera');
+    }
+    return dialer;
   }
 
   Future<bool> launchMessaging() async {
@@ -24,7 +29,12 @@ class MainBloc with ChangeNotifier, Tasks {
   }
 
   Future<bool> launchDialer() async {
-    return await DeviceApps.openApp('com.android.dialer');
+    if (!await DeviceApps.openApp('com.android.dialer')) {
+      await DeviceApps.openApp('com.sh.smart.caller');
+    }
+
+    // check for dialer app`
+    return false;
   }
 
   Future<void> getApps({bool shouldNotify: true}) async {

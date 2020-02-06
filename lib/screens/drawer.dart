@@ -21,6 +21,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   Widget _buildAppIcon(app) {
     return InkWell(
         onTap: () async {
+          print(app.packageName);
           await DeviceApps.openApp(app.packageName);
         },
         child: Container(

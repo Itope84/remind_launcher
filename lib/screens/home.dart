@@ -167,7 +167,7 @@ class _LauncherHomeState extends State<LauncherHome> {
       'car_ultra_urban.jpg',
       'car_urban.jpg',
       'car_forest.jpg',
-      'garden.jpg'
+      'garden.png'
     ];
     final _random = new Random();
 
@@ -199,6 +199,8 @@ class _LauncherHomeState extends State<LauncherHome> {
       setState(() {
         _bloc = Provider.of<MainBloc>(context);
       });
+
+      _bloc.getApps(shouldNotify: false);
     }
 
     return Scaffold(
